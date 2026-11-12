@@ -4,8 +4,10 @@ name: Build and deploy to GitHub Pages
 #
 # The theme is not vendored in this repository: the workflow checks out
 # github.com/cirrus365/Radiance into themes/Radiance and builds with
-# --themesDir themes, overriding the local themesDir = ".." used for
-# development. The theme repository must therefore exist on GitHub.
+# HUGO_THEMESDIR=themes, overriding the local themesDir = ".." used for
+# development. (The --themesDir command-line flag is ignored when
+# themesDir is also set in the config file; the env var is not.)
+# The theme repository must therefore exist on GitHub.
 
 on:
   push:
@@ -38,7 +40,9 @@ jobs:
           hugo-version: "0.169.0"
           extended: true
       - name: Build
-        run: hugo --gc --minify --themesDir themes
+        run: hugo --gc --minify
+        env:
+          HUGO_THEMESDIR: themes
       - name: Upload the site
         uses: actions/upload-pages-artifact@v3
         with:
