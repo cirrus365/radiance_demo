@@ -1,0 +1,56 @@
+name: Build and deploy to GitHub Pages
+
+# Builds the site with Hugo and deploys it to GitHub Pages.
+#
+# The theme is not vendored in this repository: the workflow checks out
+# github.com/cirrus365/Radiance into themes/Radiance and builds with
+# --themesDir themes, overriding the local themesDir = ".." used for
+# development. The theme repository must therefore exist on GitHub.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the site
+        uses: actions/checkout@v4
+      - name: Checkout the theme
+        uses: actions/checkout@v4
+        with:
+          repository: cirrus365/Radiance
+          path: themes/Radiance
+      - name: Install Hugo Extended
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: "0.169.0"
+          extended: true
+      - name: Build
+        run: hugo --gc --minify --themesDir themes
+      - name: Upload the site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

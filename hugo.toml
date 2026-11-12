@@ -1,0 +1,99 @@
+# radiance_test — a standalone test site for developing the radiance theme.
+#
+# The theme lives in the neighbouring checkout (../Radiance) and is
+# resolved through themesDir, so plain `hugo server` in this directory
+# picks up theme edits immediately — no build flags required.
+
+baseURL = "https://cirrus365.github.io/radiance_demo/"
+title = "radiance example"
+# The language key doubles as the document language (lang="en-gb").
+defaultContentLanguage = "en-gb"
+themesDir = ".."
+theme = "Radiance"
+
+[params]
+  description = "A standalone test site for the radiance Hugo theme."
+  [[params.workspaces]]
+    label = "Home"
+    pageRef = "/"
+  [[params.workspaces]]
+    label = "Archive"
+    pageRef = "/archive"
+  [[params.workspaces]]
+    label = "Tags"
+    pageRef = "/tags"
+  [[params.workspaces]]
+    label = "About"
+    pageRef = "/about"
+
+[params.trash]
+  label = "Trash"
+  pageRef = "/trash"
+
+# Top panel menus: Applications, Places and System.
+
+[[menus.applications]]
+  name = "Posts"
+  pageRef = "/posts"
+  weight = 10
+  [menus.applications.params]
+    glyph = "document"
+
+[[menus.applications]]
+  name = "Moodboards"
+  pageRef = "/moodboards"
+  weight = 20
+  [menus.applications.params]
+    glyph = "folder"
+
+[[menus.places]]
+  name = "Home"
+  pageRef = "/"
+  weight = 10
+  [menus.places.params]
+    glyph = "home"
+
+[[menus.places]]
+  name = "Archive"
+  pageRef = "/archive"
+  weight = 20
+  [menus.places.params]
+    glyph = "folder"
+
+[[menus.places]]
+  name = "Search"
+  pageRef = "/search"
+  weight = 30
+  [menus.places.params]
+    glyph = "document"
+
+[[menus.places]]
+  name = "Tags"
+  pageRef = "/tags"
+  weight = 40
+  [menus.places.params]
+    glyph = "folder"
+
+[[menus.system]]
+  name = "About this site"
+  pageRef = "/about"
+  weight = 10
+  [menus.system.params]
+    glyph = "info"
+
+[[menus.system]]
+  name = "RSS feed"
+  pageRef = "/"
+  weight = 20
+  [menus.system.params]
+    glyph = "feed"
+    feed = true
+
+# Search index: a custom output format on the home page renders index.json.
+
+[outputFormats]
+  [outputFormats.search]
+    mediaType = "application/json"
+
+[outputs]
+  home = ["HTML", "RSS", "search"]
