@@ -1,92 +1,67 @@
-# radiance_test — a standalone test site for developing the radiance theme.
+# radiance_demo — a standalone demo site for the radiance theme.
+#
+# The content, data files and menus mirror Radiance/exampleSite, so every
+# theme feature can be exercised: the handbook (content/docs, served
+# under /docs/), posts (including a travel post), moodboards, the
+# archive, tags, search and the appearance toggle.
 #
 # The theme lives in the neighbouring checkout (../Radiance) and is
 # resolved through themesDir, so plain `hugo server` in this directory
-# picks up theme edits immediately — no build flags required.
+# picks up theme edits immediately — no build flags required. The Pages
+# workflow (.github/workflows/pages.yml) checks out the theme into
+# themes/Radiance and overrides themesDir with HUGO_THEMESDIR instead:
+# the --themesDir command-line flag is ignored when themesDir is also
+# set in the config file; the environment variable is not.
 
 baseURL = "https://cirrus365.github.io/radiance_demo/"
-title = "radiance example"
+title = "radiance"
 # The language key doubles as the document language (lang="en-gb").
 defaultContentLanguage = "en-gb"
 themesDir = ".."
 theme = "Radiance"
 
 [params]
-  description = "A standalone test site for the radiance Hugo theme."
-  [[params.workspaces]]
-    label = "Home"
-    pageRef = "/"
-  [[params.workspaces]]
-    label = "Archive"
-    pageRef = "/archive"
-  [[params.workspaces]]
-    label = "Tags"
-    pageRef = "/tags"
-  [[params.workspaces]]
-    label = "About"
-    pageRef = "/about"
+  description = "A Hugo theme that makes a content website feel like an Ubuntu desktop running GNOME 2."
 
-[params.trash]
-  label = "Trash"
-  pageRef = "/trash"
+# Primary navigation for the top panel (layouts/partials/panel-top.html).
+# A search link is rendered by the theme itself when a "search" page
+# exists.
 
-# Top panel menus: Applications, Places and System.
-
-[[menus.applications]]
+[[menus.main]]
   name = "Posts"
   pageRef = "/posts"
   weight = 10
-  [menus.applications.params]
-    glyph = "document"
 
-[[menus.applications]]
+[[menus.main]]
   name = "Moodboards"
   pageRef = "/moodboards"
   weight = 20
-  [menus.applications.params]
-    glyph = "folder"
 
-[[menus.places]]
-  name = "Home"
-  pageRef = "/"
-  weight = 10
-  [menus.places.params]
-    glyph = "home"
-
-[[menus.places]]
+[[menus.main]]
   name = "Archive"
   pageRef = "/archive"
-  weight = 20
-  [menus.places.params]
-    glyph = "folder"
-
-[[menus.places]]
-  name = "Search"
-  pageRef = "/search"
   weight = 30
-  [menus.places.params]
-    glyph = "document"
 
-[[menus.places]]
-  name = "Tags"
-  pageRef = "/tags"
+[[menus.main]]
+  name = "Docs"
+  pageRef = "/docs"
   weight = 40
-  [menus.places.params]
-    glyph = "folder"
 
-[[menus.system]]
-  name = "About this site"
+[[menus.main]]
+  name = "Work with me"
+  pageRef = "/work-with-me"
+  weight = 50
+
+[[menus.main]]
+  name = "About"
   pageRef = "/about"
-  weight = 10
-  [menus.system.params]
-    glyph = "info"
+  weight = 60
 
-[[menus.system]]
-  name = "RSS feed"
+[[menus.main]]
+  name = "RSS"
   pageRef = "/"
-  weight = 20
-  [menus.system.params]
-    glyph = "feed"
+  weight = 70
+  [menus.main.params]
     feed = true
 
 # Search index: a custom output format on the home page renders index.json.

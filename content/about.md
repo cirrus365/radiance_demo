@@ -11,10 +11,10 @@ content website feel like an Ubuntu desktop running GNOME 2.
 
 - The default light appearance is inspired by Ubuntu Radiance.
 - The Ambiance dark appearance is its darker companion.
-- All authored colour values live in `assets/css/tokens.css`.
+- All authored colour values live in the scheme files under `data/schemes/`.
 
 ## This site
 
-The top panel provides Applications, Places and System menus; the applets
-on the right show the time, a link and a text meter. The sample posts cover
-getting started and the design tokens.
+The top panel carries the site title, the primary navigation links, a
+search link and the appearance toggle. The sample posts cover getting
+started and the design tokens.

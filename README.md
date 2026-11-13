@@ -35,9 +35,11 @@ The site is built with `baseURL = https://cirrus365.github.io/radiance_demo/`
 ## Content
 
 The content, data files and menus mirror `Radiance/exampleSite` so every
-theme feature can be exercised: menus and applets, desktop shortcuts,
-moodboard boards (with tile data and generated assets), the archive, tags,
-search and the appearance selector.
+theme feature can be exercised: the documentation handbook
+(`content/docs/`, served under `/docs/`), posts (including a travel post
+with photographs), moodboard boards (with tile data and assets), the
+archive, tags, search, the appearance toggle and the homepage profile
+card.
 
 `hugo.toml` sets `theme = "Radiance"`; on case-sensitive filesystems the
 theme checkout directory must keep that name (see the theme README for the
